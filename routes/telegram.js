@@ -1,6 +1,6 @@
 const express = require('express');
 const TelegramBot = require('node-telegram-bot-api');
-const { filterLecturers } = require('./data');
+// const { filterLecturers } = require('./data');
 const { findUser,validatePassword , registerUser} = require('./users');
 const Lecturer = require('../models/Lecturers');
 const router = express.Router();
