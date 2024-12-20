@@ -4,7 +4,7 @@ const User = require('./models/User');
 const Lecturer = require('./models/Lecturers');
 
 
-const mongoURI = 'mongodb://localhost:27017/finderdb';
+const mongoURI = 'mongodb+srv://sonwuagbaizu2202300:EEe8UjbCfXel3u8i@cluster0.efvro.mongodb.net/finderdb?retryWrites=true&w=majority&appName=Cluster0';
 
 const lecturers = [
     { name: "Emmanuel Frankly", department: "Computer Science", course: "Data Structures",office:"Room D306" },
