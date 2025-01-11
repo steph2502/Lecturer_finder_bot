@@ -98,6 +98,7 @@ bot.onText(/\/login/, async (msg) => {
 
             const isValid = await validatePassword(username, password);
             if (isValid) {
+                userSessions[msg.chat.id] = username;
                 bot.sendMessage(msg.chat.id, `Welcome, ${username}! You are now logged in.`);
             } else {
                 bot.sendMessage(msg.chat.id, "Invalid credentials. Please try again.");
