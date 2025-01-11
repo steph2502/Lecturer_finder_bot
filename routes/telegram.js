@@ -9,7 +9,7 @@ const connectDB = require('../db');
 
 const token = '7630430232:AAEplBmXm6trvWAutsGMwTB5FiNP4h5AW9Y';
 const bot = new TelegramBot(token, { polling: true });
-
+const userSessions = {};
 
 bot.onText(/\/start/, (msg) => {
     bot.sendMessage(msg.chat.id, "Welcome to the Lecturer Finder bot! Use /help for assistance.");
