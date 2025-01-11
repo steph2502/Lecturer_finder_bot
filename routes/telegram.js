@@ -16,7 +16,7 @@ bot.onText(/\/start/, (msg) => {
 });
 
 bot.onText(/\/help/, (msg) => {
-    bot.sendMessage(msg.chat.id, "Available commands:\n/lecturers - View lecturers\n/search - Search for a lecturer\n/login - Login\n/start - Start the bot\n/register - Register");
+    bot.sendMessage(msg.chat.id, "Available commands:\n/lecturers - View lecturers\n/search - Search for a lecturer\n/login - Login\n/start - Start the bot\n/register - Register\n/logout - Logout");
 });
 
 bot.onText(/\/lecturers/, async (msg) => {
@@ -36,8 +36,13 @@ bot.onText(/\/lecturers/, async (msg) => {
 });
 
 bot.onText(/\/search (.+)/, async (msg, match) => {
+    const userId = msg.chat.id;
     const query = match[1].toLowerCase();
-    
+
+     if (!userSessions[userId]) {
+        bot.sendMessage(msg.chat.id, "You need to log in to use the search feature. Use /login to log in.");
+        return;
+    }
     try {
         const results = await Lecturer.find({
             $or: [
@@ -100,7 +105,16 @@ bot.onText(/\/login/, async (msg) => {
         });
     });
 });
+bot.onText(/\/logout/, (msg) => {
+    const userId = msg.chat.id;
 
+    if (userSessions[userId]) {
+        delete userSessions[userId]; // Remove the user's session
+        bot.sendMessage(msg.chat.id, "You have been logged out.");
+    } else {
+        bot.sendMessage(msg.chat.id, "You are not logged in.");
+    }
+});
 
 router.get('/test', (req, res) => {
     res.send("Telegram bot is running with polling!");
